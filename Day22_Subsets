@@ -1,0 +1,21 @@
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        generateSubsets(0, nums, new ArrayList<>(), result);
+        return result;
+    }
+
+    private void generateSubsets(int index, int[] nums, List<Integer> current, List<List<Integer>> result) {
+        // Add the current subset to the result list
+        result.add(new ArrayList<>(current));
+
+        // Iterate through the elements starting from the current index
+        for (int i = index; i < nums.length; i++) {
+            // Create a new list for the next recursive call to avoid pass-by-reference issues
+            List<Integer> newCurrent = new ArrayList<>(current);
+            newCurrent.add(nums[i]);
+            
+            // Move to the next element
+            generateSubsets(i + 1, nums, newCurrent, result);
+        }}
+}
